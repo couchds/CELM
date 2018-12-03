@@ -23,11 +23,14 @@ session = driver.session()
 with open('./data/serious_effects.list', 'r') as infile:
     for line in infile:
         effect_name = line.strip()
+        print(line)
         session.run('MERGE (:Effect {name: "%s"})' % (effect_name))
 
 with open('./data/drugs.list', 'r') as infile:
     for line in infile:
         drug_name, product_name = line.strip().split('\t')
+        print(drug_name)
+        print(product_name)
         session.run('MERGE (:Drug {name: "%s", product_name: "%s"})' % (drug_name, product_name))
-
+session.close()
 print('Done!')
